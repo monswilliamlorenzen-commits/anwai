@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Ari W9500";
+  src: url("/fonts/ari-w9500.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Ari W9500";
+  src: url("/fonts/ari-w9500-bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg: #0a0a0a;
+  --panel: #111111;
+  --text: #f5f5f5;
+  --muted: #a8a8a8;
+  --accent: #ffffff;
+  --border: #2a2a2a;
+}
+
+@layer base {
+  * {
+    @apply box-border m-0 p-0;
+  }
+  body {
+    @apply bg-[var(--bg)] text-[var(--text)] leading-relaxed;
+    font-family: "Ari W9500", sans-serif;
+  }
+  a {
+    @apply text-inherit no-underline;
+  }
+}
