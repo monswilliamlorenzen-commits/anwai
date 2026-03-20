@@ -25,6 +25,7 @@ export default async function LandingPage({
             alt="Anwai"
             width={520}
             height={120}
+            unoptimized
             className="block w-[min(520px,90%)] sm:w-[min(320px,92%)] h-auto my-2 brightness-0 invert"
           />
         </div>
