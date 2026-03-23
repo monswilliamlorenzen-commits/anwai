@@ -28,10 +28,6 @@ export default async function ContactPage({
               <a href="mailto:hello@anwai.wtf" className="break-words">hello@anwai.wtf</a>
             </div>
             <div>
-              <p className="text-[var(--muted)] text-[0.9rem] uppercase tracking-[0.15rem]">{t.management}</p>
-              <a href="tel:+46792026095">+46 79 202 60 95</a>
-            </div>
-            <div>
               <p className="text-[var(--muted)] text-[0.9rem] uppercase tracking-[0.15rem]">{t.social}</p>
               <a href="https://instagram.com/anwaiofficial" target="_blank" rel="noopener noreferrer">@anwaiofficial • Instagram</a>
             </div>

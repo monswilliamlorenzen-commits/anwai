@@ -22,14 +22,7 @@ export default async function MerchPage({
         </div>
         <div className="max-w-[700px] grid gap-6">
           <div className="my-6 border-t border-[var(--border)]" />
-          <ul className="list-none grid gap-3 text-[var(--text)]">
-            {t.items.map((item) => (
-              <li key={item.name} className="flex justify-between gap-4 py-3 border-b border-[var(--border)] text-base sm:flex-col sm:items-start">
-                <span>{item.name}</span>
-                <span className="text-[var(--muted)] text-right sm:text-left">{item.desc}</span>
-              </li>
-            ))}
-          </ul>
+          <p className="text-[var(--muted)] text-[1.15rem]">{t.underConstruction}</p>
         </div>
         <BackLink locale={locale} />
       </div>
