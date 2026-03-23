@@ -18,7 +18,6 @@ export default async function MerchPage({
         <LangToggle locale={locale} path={`/${locale}/merch`} />
         <div className="page-hero">
           <h1 className="text-[clamp(2.5rem,6vw,4rem)] sm:text-[clamp(2.2rem,7vw,3.4rem)] mb-3">{t.title}</h1>
-          <p className="text-[var(--muted)] text-[1.15rem]">{t.lead}</p>
         </div>
         <div className="max-w-[700px] grid gap-6">
           <div className="my-6 border-t border-[var(--border)]" />

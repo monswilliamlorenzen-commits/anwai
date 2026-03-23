@@ -24,7 +24,6 @@ export const translations = {
     },
     merch: {
       title: "Merch",
-      lead: "Enkla favoriter till gig och vardag.",
       underConstruction: "under konstruktion",
       items: [
         { name: "ANWAI Tee", desc: "Svart T-shirt • Unisex" },
@@ -60,7 +59,6 @@ export const translations = {
     },
     merch: {
       title: "Merch",
-      lead: "Simple favorites for shows and everyday wear.",
       underConstruction: "under construction",
       items: [
         { name: "ANWAI Tee", desc: "Black T-shirt • Unisex" },
