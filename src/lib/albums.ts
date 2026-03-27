@@ -1,5 +1,10 @@
 export const albums = [
   {
+    src: "/4ever-hd.png",
+    alt: "anwai - 4ever HD",
+    href: "https://open.spotify.com/album/3yYswM343LQmZIgKQ5CArS?si=zr9Fhc04QRWfrJP5gvH5jA",
+  },
+  {
     src: "/dreamsriks.png",
     alt: "anwai - dreams / changing (acoustic)",
     href: "https://open.spotify.com/album/2PeCMFOso773xZcZQxNw4C?si=zTf_Cj9tTvetiI7vMa8Utg",

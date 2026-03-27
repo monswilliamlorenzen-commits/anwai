@@ -24,34 +24,25 @@ export default async function DiscographyPage({
         </div>
         <div className="max-w-[700px] grid gap-0">
           <div className="grid gap-0 sm:gap-3">
-            <div className="flex gap-0 flex-wrap justify-start sm:grid sm:grid-cols-3 sm:gap-0 sm:w-full">
-              {albums.slice(0, 3).map((album) => (
-                <Link key={album.alt} href={album.href} target="_blank" rel="noopener noreferrer" className="block w-full sm:w-auto">
-                  <Image
-                    src={album.src}
-                    alt={album.alt}
-                    width={424}
-                    height={424}
-                    className="w-full sm:w-[min(240px,90vw)] sm:h-[min(240px,90vw)] sm:aspect-square sm:object-cover block rounded-xl border-2 border-[var(--border)] bg-[#0b0b0b] aspect-square"
-                    loading="lazy"
-                  />
-                </Link>
-              ))}
-            </div>
-            <div className="flex gap-0 flex-wrap justify-start sm:grid sm:grid-cols-3 sm:gap-0 sm:w-full">
-              {albums.slice(3, 6).map((album) => (
-                <Link key={album.alt} href={album.href} target="_blank" rel="noopener noreferrer" className="block w-full sm:w-auto">
-                  <Image
-                    src={album.src}
-                    alt={album.alt}
-                    width={424}
-                    height={424}
-                    className="w-full sm:w-[min(240px,90vw)] sm:h-[min(240px,90vw)] sm:aspect-square sm:object-cover block rounded-xl border-2 border-[var(--border)] bg-[#0b0b0b] aspect-square"
-                    loading="lazy"
-                  />
-                </Link>
-              ))}
-            </div>
+            {Array.from({ length: Math.ceil(albums.length / 3) }, (_, row) => (
+              <div
+                key={row}
+                className="flex gap-0 flex-wrap justify-start sm:grid sm:grid-cols-3 sm:gap-0 sm:w-full"
+              >
+                {albums.slice(row * 3, row * 3 + 3).map((album) => (
+                  <Link key={album.alt} href={album.href} target="_blank" rel="noopener noreferrer" className="block w-full sm:w-auto">
+                    <Image
+                      src={album.src}
+                      alt={album.alt}
+                      width={424}
+                      height={424}
+                      className="w-full sm:w-[min(240px,90vw)] sm:h-[min(240px,90vw)] sm:object-cover object-center block rounded-xl border-2 border-[var(--border)] bg-[#0b0b0b] aspect-square"
+                      loading="lazy"
+                    />
+                  </Link>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
         <BackLink locale={locale} />
