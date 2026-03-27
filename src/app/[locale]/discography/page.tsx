@@ -19,10 +19,10 @@ export default async function DiscographyPage({
     <main className="page min-h-screen flex flex-col pb-[90px] sm:pb-[70px] lowercase">
       <div className="flex-1 px-[8vw] sm:px-[6vw] py-16 sm:py-14 grid gap-7 relative">
         <LangToggle locale={locale} path={`/${locale}/discography`} />
-        <div className="page-hero">
-          <h1 className="text-[clamp(2.5rem,6vw,4rem)] sm:text-[clamp(2.2rem,7vw,3.4rem)]">{t.title}</h1>
-        </div>
-        <div className="mx-auto w-full max-w-[min(100%,440px)]">
+        <div className="mx-auto flex w-full max-w-[min(100%,440px)] flex-col gap-6 sm:gap-7">
+          <div className="page-hero text-center">
+            <h1 className="text-[clamp(2.5rem,6vw,4rem)] sm:text-[clamp(2.2rem,7vw,3.4rem)]">{t.title}</h1>
+          </div>
           <div className="grid grid-cols-3 gap-3 sm:gap-4">
             {albums.map((album, index) => (
               <Link
