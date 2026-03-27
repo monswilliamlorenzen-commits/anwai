@@ -22,22 +22,26 @@ export default async function DiscographyPage({
         <div className="page-hero">
           <h1 className="text-[clamp(2.5rem,6vw,4rem)] sm:text-[clamp(2.2rem,7vw,3.4rem)]">{t.title}</h1>
         </div>
-        <div className="w-full max-w-[min(100%,920px)]">
-          <div className="flex flex-row flex-wrap justify-center gap-3 sm:gap-4 md:gap-5">
-            {albums.map((album) => (
+        <div className="mx-auto w-full max-w-[min(100%,440px)]">
+          <div className="grid grid-cols-3 gap-3 sm:gap-4">
+            {albums.map((album, index) => (
               <Link
                 key={album.alt}
                 href={album.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-[min(88px,22vw)] sm:w-[min(112px,18vw)] md:w-[min(128px,14vw)] aspect-square"
+                className={
+                  index === albums.length - 1
+                    ? "col-start-2 aspect-square min-w-0"
+                    : "aspect-square min-w-0"
+                }
               >
                 <Image
                   src={album.src}
                   alt={album.alt}
                   width={160}
                   height={160}
-                  className="w-full h-full object-cover object-center rounded-lg border-2 border-[var(--border)] bg-[#0b0b0b]"
+                  className="h-full w-full object-cover object-center rounded-lg border-2 border-[var(--border)] bg-[#0b0b0b]"
                   loading="lazy"
                 />
               </Link>
