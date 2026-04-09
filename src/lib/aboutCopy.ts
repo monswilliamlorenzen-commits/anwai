@@ -1,11 +1,11 @@
 import { type Locale } from "@/lib/locales";
 
-/** Korta introtexter – vem ni är och vad ni gör */
+/** Korta introtexter – neutral beskrivning */
 export const aboutIntro: Record<Locale, string> = {
   sv:
-    "vi är mons lorenzen och amadeus rudolfsson – en duo från stockholm och västerås. under namnet anwai gör vi musik vi kallar trip-pop: melodier som funnits på streaming och i radio sedan 2010-talet, senast med dubbelsingeln '4ever hd'.",
+    "anwai är mons lorenzen och amadeus rudolfsson – en duo från stockholm och västerås. musiken beskrivs som trip-pop: melodier som funnits på streaming och i radio sedan 2010-talet, senast med dubbelsingeln '4ever hd'.",
   en:
-    "we're mons lorenzen and amadeus rudolfsson — a duo from stockholm and västerås. as anwai we make what we call trip-pop: melodic music that's been on streaming and radio since the mid-2010s, most recently with the '4ever hd' double single.",
+    "anwai is mons lorenzen and amadeus rudolfsson — a duo from stockholm and västerås. the music is described as trip-pop: melodic work on streaming and radio since the mid-2010s, most recently with the '4ever hd' double single.",
 };
 
 /** Direkt saxade citat (engelska källor) + länk till respektive inlägg */
