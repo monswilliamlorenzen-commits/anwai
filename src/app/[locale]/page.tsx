@@ -38,16 +38,16 @@ export default async function LandingPage({
           />
         </div>
         <nav className="grid gap-2.5" aria-label={locale === "sv" ? "Undersidor" : "Subpages"}>
-          <Link href={`/${locale}/about`} className="flex items-center justify-between py-1 font-bold text-[1.1rem] sm:text-[0.95rem] tracking-[0.15rem] sm:tracking-[0.12rem] uppercase hover:text-[var(--text)]">
+          <Link href={`/${locale}/about`} className="flex items-center justify-between py-1 font-bold text-[1.1rem] sm:text-[0.95rem] tracking-[0.15rem] sm:tracking-[0.12rem] uppercase text-[var(--muted)] hover:text-[var(--text)]">
             {t.nav.about}
           </Link>
-          <Link href={`/${locale}/discography`} className="flex items-center justify-between py-1 font-bold text-[1.1rem] sm:text-[0.95rem] tracking-[0.15rem] sm:tracking-[0.12rem] uppercase hover:text-[var(--text)]">
+          <Link href={`/${locale}/discography`} className="flex items-center justify-between py-1 font-bold text-[1.1rem] sm:text-[0.95rem] tracking-[0.15rem] sm:tracking-[0.12rem] uppercase text-[var(--muted)] hover:text-[var(--text)]">
             {t.nav.discography}
           </Link>
-          <Link href={`/${locale}/merch`} className="flex items-center justify-between py-1 font-bold text-[1.1rem] sm:text-[0.95rem] tracking-[0.15rem] sm:tracking-[0.12rem] uppercase hover:text-[var(--text)]">
+          <Link href={`/${locale}/merch`} className="flex items-center justify-between py-1 font-bold text-[1.1rem] sm:text-[0.95rem] tracking-[0.15rem] sm:tracking-[0.12rem] uppercase text-[var(--muted)] hover:text-[var(--text)]">
             {t.nav.merch}
           </Link>
-          <Link href={`/${locale}/contact`} className="flex items-center justify-between py-1 font-bold text-[1.1rem] sm:text-[0.95rem] tracking-[0.15rem] sm:tracking-[0.12rem] uppercase hover:text-[var(--text)]">
+          <Link href={`/${locale}/contact`} className="flex items-center justify-between py-1 font-bold text-[1.1rem] sm:text-[0.95rem] tracking-[0.15rem] sm:tracking-[0.12rem] uppercase text-[var(--muted)] hover:text-[var(--text)]">
             {t.nav.contact}
           </Link>
         </nav>
