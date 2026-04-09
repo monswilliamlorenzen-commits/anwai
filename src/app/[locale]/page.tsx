@@ -25,7 +25,8 @@ export default async function LandingPage({
           width={512}
           height={512}
           priority
-          className="h-auto w-[min(280px,78vw)] sm:w-[min(360px,70vw)]"
+          unoptimized
+          className="h-auto w-[min(280px,78vw)] sm:w-[min(360px,70vw)] mix-blend-screen"
         />
         <nav className="grid gap-2.5" aria-label={locale === "sv" ? "Undersidor" : "Subpages"}>
           <Link href={`/${locale}/about`} className="flex items-center justify-between py-1 font-bold text-[1.1rem] sm:text-[0.95rem] tracking-[0.15rem] sm:tracking-[0.12rem] uppercase hover:text-[var(--text)]">

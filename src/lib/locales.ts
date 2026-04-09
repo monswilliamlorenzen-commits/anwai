@@ -12,7 +12,7 @@ export const translations = {
     about: {
       title: "Om oss",
       lead:
-        "anwai är hjärteprojektet av amadeus rudolfsson och mons lorenzen och karaktäriseras av det säregna ljudet som ebbas ut i genren trip-pop. projektet har funnits sedan mitten av 2010-talet och har genom åren spelats flitigt på streamingtjänster och radio, nämnvärt har duons låt 'Move Along' varit med på Netflix-serien 'DeGrassi: Next Class' och just nu är duon aktuella med dubbelsingeln '4ever HD' efter ett par års hiatus",
+        "anwai är mons lorenzen och amadeus rudolfsson. alfitude skriver om återkomsten med 'something new' ur dubbelsläppet '4ever hd' och lyfter en fusion av indie, electronica och dreamig pop som är distinkt och originell men också uppslukande och känsloäkta. optimates7 beskriver '4ever hd' som framåtrörelse i textur, tålamod och trip-pop-intimitet – inte en ren comeback utan något som växer fram efter tystnad. i mesmerized.io:s intervju berättar duon bland annat om tryck efter senaste ep:n och material från en hårddisk tillbaka till 2015; artikeln nämner att tidiga spår som 'asking' och 'move along' passerat över en halv miljon streams på spotify, och att anwai kallar återkomsten en distorted continuation.",
     },
     contact: {
       title: "Kontakt",
@@ -47,7 +47,7 @@ export const translations = {
     about: {
       title: "About",
       lead:
-        "anwai is the heart project of amadeus rudolfsson and mons lorenzen and is defined by a distinctive sound rooted in trip-pop. the project has existed since the mid-2010s and has been played frequently on streaming services and radio; notably, the duo's song \"Move Along\" appeared in the netflix series \"DeGrassi: Next Class,\" and the duo is currently back with the double single \"4ever HD\" after a few years of hiatus.",
+        "anwai are mons lorenzen and amadeus rudolfsson. alfitude writes about the return with 'something new' from the '4ever hd' double release, praising an \"interesting fusion of indie, electronica and dreamy pop\" that is \"distinctive and original but also immersive and emotionally sincere.\" optimates7 frames '4ever hd' as \"forward motion in texture, patience, and trip-pop intimacy\"—not a conventional comeback. mesmerized.io’s interview quotes the duo on pressure after their last ep and material from a hard drive dating back to 2015; the piece notes tracks like 'asking' and 'move along' have passed half a million spotify streams, and anwai call the return a \"distorted continuation.\"",
     },
     contact: {
       title: "Contact",
