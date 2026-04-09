@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { LangToggle } from "@/components/LangToggle";
 import { Footer } from "@/components/Footer";
@@ -19,13 +18,15 @@ export default async function LandingPage({
       <SeamlessVideoBg />
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center gap-10 px-[8vw] sm:px-[6vw] py-10 sm:py-14">
         <LangToggle locale={locale} path={`/${locale}`} />
-        <Image
+        <img
           src="/anwai-logo-hero.png"
           alt="Anwai"
           width={512}
           height={512}
-          priority
-          className="h-auto w-[min(280px,78vw)] sm:w-[min(360px,70vw)]"
+          fetchPriority="high"
+          decoding="async"
+          className="m-0 block h-auto w-[min(280px,78vw)] border-0 bg-transparent p-0 shadow-none outline-none sm:w-[min(360px,70vw)]"
+          style={{ backgroundColor: "transparent", boxShadow: "none" }}
         />
         <nav className="grid gap-2.5" aria-label={locale === "sv" ? "Undersidor" : "Subpages"}>
           <Link href={`/${locale}/about`} className="flex items-center justify-between py-1 font-bold text-[1.1rem] sm:text-[0.95rem] tracking-[0.15rem] sm:tracking-[0.12rem] uppercase hover:text-[var(--text)]">
