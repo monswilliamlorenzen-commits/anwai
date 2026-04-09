@@ -4,7 +4,8 @@ import { useRef, useState, useEffect } from "react";
 
 const CROSSFADE_START = 0.8;
 
-export function SeamlessVideoBg() {
+/** Same seamless loop as full-page bg, sized to fill parent (logo frame). */
+export function LogoVideoFrame() {
   const video1 = useRef<HTMLVideoElement>(null);
   const video2 = useRef<HTMLVideoElement>(null);
   const [active, setActive] = useState<1 | 2>(1);
@@ -39,7 +40,7 @@ export function SeamlessVideoBg() {
   }, []);
 
   return (
-    <div className="fixed inset-0 z-0 opacity-60">
+    <>
       <video
         ref={video1}
         muted
@@ -47,7 +48,7 @@ export function SeamlessVideoBg() {
         playsInline
         preload="auto"
         aria-hidden
-        className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
+        className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700"
         style={{ opacity: active === 1 ? 1 : 0 }}
       >
         <source src="/stars-bg.mp4" type="video/mp4" />
@@ -59,11 +60,11 @@ export function SeamlessVideoBg() {
         playsInline
         preload="auto"
         aria-hidden
-        className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
+        className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700"
         style={{ opacity: active === 2 ? 1 : 0 }}
       >
         <source src="/stars-bg.mp4" type="video/mp4" />
       </video>
-    </div>
+    </>
   );
 }
