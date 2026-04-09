@@ -19,7 +19,7 @@ export default async function LandingPage({
         <LangToggle locale={locale} path={`/${locale}`} />
         <div className="relative inline-block">
           <div
-            className="pointer-events-none absolute -inset-3 z-0 overflow-hidden rounded-2xl border border-[var(--border)] opacity-75 sm:-inset-4 sm:rounded-3xl md:-inset-5"
+            className="pointer-events-none absolute -inset-5 z-0 overflow-hidden border border-[var(--border)] opacity-75 sm:-inset-7 md:-inset-9"
             aria-hidden
           >
             <div className="absolute inset-0">

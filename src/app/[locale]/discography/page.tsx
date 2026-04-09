@@ -41,7 +41,7 @@ export default async function DiscographyPage({
                   alt={album.alt}
                   width={160}
                   height={160}
-                  className="h-full w-full object-cover object-center rounded-lg border-2 border-[var(--border)] bg-[#0b0b0b]"
+                  className="h-full w-full object-cover object-center border-2 border-[var(--border)] bg-black"
                   loading="lazy"
                 />
               </Link>
