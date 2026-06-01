@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>anwai</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body.landing {
+        margin: 0;
+        padding: 0;
+        background: #001100;
+        overflow-x: hidden;
+        min-height: 100vh;
+      }
+
+      #kinetic-canvas {
+        position: fixed;
+        top: 37px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 37px - 57px);
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .landing-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: #000;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 0.7rem 1.5rem;
+        z-index: 100;
+      }
+
+      .lang-toggle-fixed {
+        position: static;
+        color: #33ff33;
+        font-family: 'Courier New', monospace;
+        font-size: 0.85rem;
+        letter-spacing: 0.1em;
+        text-shadow: 0 0 8px #00ff00;
+      }
+
+      .lang-toggle-fixed a {
+        color: #33ff33;
+        text-decoration: none;
+        opacity: 0.6;
+      }
+
+      .lang-toggle-fixed a.active {
+        opacity: 1;
+      }
+
+      .lang-toggle-fixed span {
+        margin: 0 0.3rem;
+        opacity: 0.4;
+      }
+
+      .landing-footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+        padding: 1rem 2rem;
+        z-index: 20;
+      }
+
+      .landing-footer a {
+        color: #ffffff;
+        text-decoration: none;
+        font-family: 'Courier New', monospace;
+        font-size: 0.85rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        opacity: 0.8;
+        transition: opacity 0.2s;
+      }
+
+      .landing-footer a:hover {
+        opacity: 1;
+      }
+
+      .landing-footer .footer-copy {
+        color: #555;
+        font-family: 'Courier New', monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.08em;
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+  <body class="landing">
+    <canvas id="kinetic-canvas"></canvas>
+
+    <header class="landing-header">
+      <div class="lang-toggle-fixed">
+        <a class="active" href="index.html">SE</a>
+        <span>/</span>
+        <a href="index-en.html">EN</a>
+      </div>
+    </header>
+
+    <footer class="landing-footer">
+      <a href="about.html">Om oss</a>
+      <a href="discography.html">Diskografi</a>
+      <a href="merch.html">Merch</a>
+      <a href="contact.html">Kontakt</a>
+      <span class="footer-copy">© 2026 Anwai</span>
+    </footer>
+
+    <script>
+      const config = {
+        "text": "anwai",
+        "rows": 15,
+        "fontSize": 105,
+        "tracking": 0.6,
+        "lineSpace": 19,
+        "baseColor": "#33ff33",
+        "spiralEnabled": false,
+        "spiralIntensity": 60,
+        "spiralSpeed": 2,
+        "spiralTightness": 1.2,
+        "spiralInward": false,
+        "elasticEnabled": false,
+        "elasticStretch": 0.4,
+        "elasticSpeed": 1,
+        "elasticFreq": 0.02,
+        "orbitEnabled": false,
+        "orbitRadius": 50,
+        "orbitSpeed": 2,
+        "orbitPhase": 0.5,
+        "liquidEnabled": false,
+        "liquidDrip": 30,
+        "liquidFlow": 0.3,
+        "liquidViscosity": 0.01,
+        "chromaticEnabled": true,
+        "chromaticOffset": 2,
+        "chromaticAngle": 0,
+        "chromaticAnimated": true,
+        "glitchEnabled": true,
+        "glitchIntensity": 3,
+        "glitchFreq": 0.02,
+        "glitchSlice": 10,
+        "depthEnabled": false,
+        "depthParallax": 1.5,
+        "depthScale": 0.6,
+        "depthOpacity": 0.4,
+        "shatterEnabled": false,
+        "shatterFrag": 10,
+        "shatterSpread": 30,
+        "shatterRotation": 0.5,
+        "shatterGravity": true,
+        "scrollEnabled": false,
+        "scrollSpeed": 1,
+        "scrollImpact": 50,
+        "scrollReverse": false,
+        "mouseEnabled": false,
+        "mouseMode": "attract",
+        "mouseRadius": 200,
+        "mouseStrength": 100,
+        "mouseTrail": false,
+        "rotation3dEnabled": false,
+        "rotationX": 0,
+        "rotationY": 0,
+        "rotationZ": 0,
+        "rotationXSpeed": 0,
+        "rotationYSpeed": 1.5,
+        "rotationZSpeed": 0,
+        "perspective": 800,
+        "perspectiveOriginX": 50,
+        "perspectiveOriginY": 50,
+        "bgMode": "solid",
+        "bgColor": "#001100",
+        "bgGradientColor1": "#000d1a",
+        "bgGradientColor2": "#001a2e",
+        "bgGradientAngle": 90,
+        "bgGradientSpeed": 0,
+        "bgNoiseOpacity": 0.04,
+        "bgVignetteStrength": 0.8,
+        "bgScanlineOpacity": 0.15,
+        "bgScanlineSpacing": 3,
+        "bgPulseSpeed": 1,
+        "bgPulseStrength": 0,
+        "gradientEnabled": false,
+        "gradientColor1": "#0044ff",
+        "gradientColor2": "#00ffcc",
+        "gradientAngle": 0,
+        "gradientAnimated": true,
+        "glowEnabled": true,
+        "glowColor": "#00ff00",
+        "glowIntensity": 10,
+        "glowBlur": 8,
+        "hueRotateEnabled": false,
+        "hueRotateSpeed": 1
+      };
+
+      let time = 0;
+      let mouseX = 0;
+      let mouseY = 0;
+      let mouseMoved = false;
+
+      const canvas = document.getElementById('kinetic-canvas');
+      const ctx = canvas.getContext('2d');
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        mouseMoved = true;
+      });
+
+      function drawText() {
+        ctx.fillStyle = config.bgColor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        const fontSize = config.fontSize;
+        ctx.font = `${fontSize}px 'Courier New', monospace`;
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'middle';
+
+        const charWidth = ctx.measureText('M').width * config.tracking;
+        const textPattern = config.text + '  ';
+        const patternWidth = charWidth * textPattern.length;
+
+        for (let row = 0; row < config.rows; row++) {
+          const baseY = (canvas.height / (config.rows + 1)) * (row + 1);
+          const rowSpeed = row % 2 === 0 ? 1 : -1;
+          const baseRowOffset = (time * 10 * rowSpeed) % patternWidth;
+          const repeatsNeeded = Math.ceil(canvas.width / patternWidth) + 3;
+
+          for (let repeat = -2; repeat < repeatsNeeded; repeat++) {
+            for (let i = 0; i < textPattern.length; i++) {
+              const char = textPattern[i];
+              if (char === ' ') continue;
+
+              let x = repeat * patternWidth + i * charWidth - baseRowOffset;
+              let y = baseY;
+              let rotation = 0;
+              let scaleX = 1;
+              let scaleY = 1;
+              let opacity = 1;
+
+              if (config.glitchEnabled) {
+                const glitchNoise = Math.random();
+                if (glitchNoise < config.glitchFreq) {
+                  x += (Math.random() - 0.5) * config.glitchIntensity * 2;
+                  y += Math.floor(Math.random() * config.glitchSlice) * (Math.random() > 0.5 ? 1 : -1);
+                }
+              }
+
+              if (x > -200 && x < canvas.width + 200 && y > -200 && y < canvas.height + 200) {
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.rotate(rotation);
+                ctx.scale(scaleX, scaleY);
+                ctx.globalAlpha = opacity;
+
+                if (config.glowEnabled) {
+                  ctx.shadowColor = config.glowColor;
+                  ctx.shadowBlur = config.glowBlur;
+                  ctx.shadowOffsetX = 0;
+                  ctx.shadowOffsetY = 0;
+                }
+
+                if (config.chromaticEnabled) {
+                  const offset = config.chromaticOffset;
+                  const angle = config.chromaticAnimated ?
+                    (config.chromaticAngle + time * 50) * Math.PI / 180 :
+                    config.chromaticAngle * Math.PI / 180;
+
+                  const offsetX = Math.cos(angle) * offset;
+                  const offsetY = Math.sin(angle) * offset;
+
+                  ctx.fillStyle = '#ff0000';
+                  ctx.globalAlpha = opacity * 0.5;
+                  ctx.fillText(char, -offsetX, -offsetY);
+
+                  ctx.fillStyle = '#00ff00';
+                  ctx.fillText(char, 0, 0);
+
+                  ctx.fillStyle = '#0000ff';
+                  ctx.fillText(char, offsetX, offsetY);
+
+                  ctx.globalAlpha = opacity;
+                } else {
+                  ctx.fillStyle = config.baseColor;
+                  ctx.fillText(char, 0, 0);
+                }
+
+                ctx.filter = 'none';
+                ctx.shadowBlur = 0;
+                ctx.restore();
+              }
+            }
+          }
+        }
+
+        time += 0.03;
+      }
+
+      function animate() {
+        drawText();
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    </script>
+  </body>
+</html>
