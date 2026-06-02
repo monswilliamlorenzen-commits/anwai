@@ -9,7 +9,7 @@
       body.landing {
         margin: 0;
         padding: 0;
-        background: #001100;
+        background: #000000;
         overflow-x: hidden;
         min-height: 100vh;
       }
@@ -39,15 +39,14 @@
 
       .lang-toggle-fixed {
         position: static;
-        color: #33ff33;
+        color: #ffffff;
         font-family: 'Courier New', monospace;
         font-size: 0.85rem;
         letter-spacing: 0.1em;
-        text-shadow: 0 0 8px #00ff00;
       }
 
       .lang-toggle-fixed a {
-        color: #33ff33;
+        color: #ffffff;
         text-decoration: none;
         opacity: 0.6;
       }
@@ -122,89 +121,90 @@
       const config = {
         "text": "anwai",
         "rows": 15,
-        "fontSize": 105,
+        "fontSize": 92,
         "tracking": 0.6,
-        "lineSpace": 19,
-        "baseColor": "#33ff33",
+        "lineSpace": 5,
+        "baseColor": "#ffffff",
         "spiralEnabled": false,
-        "spiralIntensity": 60,
-        "spiralSpeed": 2,
-        "spiralTightness": 1.2,
+        "spiralIntensity": 50,
+        "spiralSpeed": 1,
+        "spiralTightness": 0.5,
         "spiralInward": false,
         "elasticEnabled": false,
-        "elasticStretch": 0.4,
+        "elasticStretch": 0.3,
         "elasticSpeed": 1,
         "elasticFreq": 0.02,
         "orbitEnabled": false,
-        "orbitRadius": 50,
-        "orbitSpeed": 2,
+        "orbitRadius": 30,
+        "orbitSpeed": 1,
         "orbitPhase": 0.5,
         "liquidEnabled": false,
-        "liquidDrip": 30,
-        "liquidFlow": 0.3,
+        "liquidDrip": 50,
+        "liquidFlow": 0.5,
         "liquidViscosity": 0.01,
         "chromaticEnabled": true,
         "chromaticOffset": 2,
-        "chromaticAngle": 0,
+        "chromaticAngle": 360,
         "chromaticAnimated": true,
         "glitchEnabled": true,
-        "glitchIntensity": 3,
-        "glitchFreq": 0.02,
-        "glitchSlice": 10,
-        "depthEnabled": false,
-        "depthParallax": 1.5,
-        "depthScale": 0.6,
-        "depthOpacity": 0.4,
+        "glitchIntensity": 0,
+        "glitchFreq": 0.01,
+        "glitchSlice": 16,
+        "depthEnabled": true,
+        "depthParallax": 1.6,
+        "depthScale": 1,
+        "depthOpacity": 0.55,
         "shatterEnabled": false,
         "shatterFrag": 10,
         "shatterSpread": 30,
         "shatterRotation": 0.5,
         "shatterGravity": true,
-        "scrollEnabled": false,
-        "scrollSpeed": 1,
+        "scrollEnabled": true,
+        "scrollSpeed": 0,
         "scrollImpact": 50,
         "scrollReverse": false,
-        "mouseEnabled": false,
-        "mouseMode": "attract",
-        "mouseRadius": 200,
-        "mouseStrength": 100,
+        "mouseEnabled": true,
+        "mouseMode": "repel",
+        "mouseRadius": 322,
+        "mouseStrength": 104,
         "mouseTrail": false,
-        "rotation3dEnabled": false,
+        "rotation3dEnabled": true,
         "rotationX": 0,
         "rotationY": 0,
         "rotationZ": 0,
         "rotationXSpeed": 0,
-        "rotationYSpeed": 1.5,
+        "rotationYSpeed": 0,
         "rotationZSpeed": 0,
-        "perspective": 800,
+        "perspective": 1000,
         "perspectiveOriginX": 50,
         "perspectiveOriginY": 50,
         "bgMode": "solid",
-        "bgColor": "#001100",
-        "bgGradientColor1": "#000d1a",
-        "bgGradientColor2": "#001a2e",
-        "bgGradientAngle": 90,
+        "bgColor": "#000000",
+        "bgGradientColor1": "#0a0a2e",
+        "bgGradientColor2": "#1a0a2e",
+        "bgGradientAngle": 135,
         "bgGradientSpeed": 0,
-        "bgNoiseOpacity": 0.04,
-        "bgVignetteStrength": 0.8,
-        "bgScanlineOpacity": 0.15,
-        "bgScanlineSpacing": 3,
+        "bgNoiseOpacity": 0,
+        "bgVignetteStrength": 0,
+        "bgScanlineOpacity": 0,
+        "bgScanlineSpacing": 4,
         "bgPulseSpeed": 1,
         "bgPulseStrength": 0,
         "gradientEnabled": false,
-        "gradientColor1": "#0044ff",
-        "gradientColor2": "#00ffcc",
+        "gradientColor1": "#000000",
+        "gradientColor2": "#a1a1a1",
         "gradientAngle": 0,
-        "gradientAnimated": true,
+        "gradientAnimated": false,
         "glowEnabled": true,
-        "glowColor": "#00ff00",
+        "glowColor": "#5c5c5c",
         "glowIntensity": 10,
-        "glowBlur": 8,
+        "glowBlur": 20,
         "hueRotateEnabled": false,
         "hueRotateSpeed": 1
       };
 
       let time = 0;
+      let scrollProgress = 0;
       let mouseX = 0;
       let mouseY = 0;
       let mouseMoved = false;
@@ -220,6 +220,11 @@
       window.addEventListener('resize', resizeCanvas);
       resizeCanvas();
 
+      window.addEventListener('scroll', () => {
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        scrollProgress = window.scrollY / maxScroll;
+      });
+
       window.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
@@ -227,7 +232,7 @@
       });
 
       function drawText() {
-        ctx.fillStyle = config.bgColor;
+        ctx.fillStyle = '#000';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         const fontSize = config.fontSize;
@@ -239,23 +244,33 @@
         const textPattern = config.text + '  ';
         const patternWidth = charWidth * textPattern.length;
 
+        const scrollOffset = config.scrollEnabled ?
+          scrollProgress * config.scrollImpact * (config.scrollReverse ? -1 : 1) : 0;
+
         for (let row = 0; row < config.rows; row++) {
           const baseY = (canvas.height / (config.rows + 1)) * (row + 1);
+
+          const depthLayer = config.depthEnabled ? row / config.rows : 0.5;
+          const depthScale = config.depthEnabled ? 1 - (depthLayer * config.depthScale) : 1;
+          const depthOpacity = config.depthEnabled ? 1 - (depthLayer * config.depthOpacity) : 1;
+          const depthOffset = config.depthEnabled ? scrollOffset * depthLayer * config.depthParallax * 100 : 0;
+
           const rowSpeed = row % 2 === 0 ? 1 : -1;
-          const baseRowOffset = (time * 10 * rowSpeed) % patternWidth;
-          const repeatsNeeded = Math.ceil(canvas.width / patternWidth) + 3;
+          const baseRowOffset = (time * 10 * rowSpeed + scrollOffset * 10 + depthOffset) % patternWidth;
+          const repeatsNeeded = Math.ceil(canvas.width / (patternWidth * depthScale)) + 3;
 
           for (let repeat = -2; repeat < repeatsNeeded; repeat++) {
             for (let i = 0; i < textPattern.length; i++) {
               const char = textPattern[i];
               if (char === ' ') continue;
 
-              let x = repeat * patternWidth + i * charWidth - baseRowOffset;
+              let baseX = repeat * patternWidth + i * charWidth - baseRowOffset;
+              let x = baseX;
               let y = baseY;
               let rotation = 0;
-              let scaleX = 1;
-              let scaleY = 1;
-              let opacity = 1;
+              let scaleX = depthScale;
+              let scaleY = depthScale;
+              let opacity = depthOpacity;
 
               if (config.glitchEnabled) {
                 const glitchNoise = Math.random();
@@ -263,6 +278,46 @@
                   x += (Math.random() - 0.5) * config.glitchIntensity * 2;
                   y += Math.floor(Math.random() * config.glitchSlice) * (Math.random() > 0.5 ? 1 : -1);
                 }
+              }
+
+              if (config.mouseEnabled && mouseMoved) {
+                const dx = x - mouseX;
+                const dy = y - mouseY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < config.mouseRadius) {
+                  const force = (1 - distance / config.mouseRadius) * config.mouseStrength;
+                  const angle = Math.atan2(dy, dx);
+                  if (config.mouseMode === 'repel') {
+                    x += Math.cos(angle) * force;
+                    y += Math.sin(angle) * force;
+                  } else if (config.mouseMode === 'attract') {
+                    x -= Math.cos(angle) * force;
+                    y -= Math.sin(angle) * force;
+                  }
+                }
+              }
+
+              if (config.rotation3dEnabled) {
+                const radX = config.rotationX * Math.PI / 180;
+                const radY = config.rotationY * Math.PI / 180;
+                const centerX = canvas.width * (config.perspectiveOriginX / 100);
+                const centerY = canvas.height * (config.perspectiveOriginY / 100);
+                const relX = x - centerX;
+                const relY = y - centerY;
+                const cosY = Math.cos(radY);
+                const sinY = Math.sin(radY);
+                const x3d = relX * cosY;
+                const z3d = relX * sinY;
+                const cosX = Math.cos(radX);
+                const sinX = Math.sin(radX);
+                const y3d = relY * cosX - z3d * sinX;
+                const z3dFinal = relY * sinX + z3d * cosX;
+                const scale3d = config.perspective / (config.perspective + z3dFinal);
+                x = centerX + x3d * scale3d;
+                y = centerY + y3d * scale3d;
+                scaleX *= scale3d;
+                scaleY *= scale3d;
+                opacity *= Math.max(0.3, scale3d);
               }
 
               if (x > -200 && x < canvas.width + 200 && y > -200 && y < canvas.height + 200) {
@@ -284,7 +339,6 @@
                   const angle = config.chromaticAnimated ?
                     (config.chromaticAngle + time * 50) * Math.PI / 180 :
                     config.chromaticAngle * Math.PI / 180;
-
                   const offsetX = Math.cos(angle) * offset;
                   const offsetY = Math.sin(angle) * offset;
 
