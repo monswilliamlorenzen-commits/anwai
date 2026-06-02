@@ -6,20 +6,28 @@
     <title>anwai</title>
     <link rel="stylesheet" href="styles.css" />
     <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
       body.landing {
-        margin: 0;
-        padding: 0;
-        background: #000000;
+        background: #000;
+        color: #fff;
+        font-family: 'Courier New', monospace;
         overflow-x: hidden;
-        min-height: 100vh;
+      }
+
+      /* ── HERO SECTION ── */
+      .hero-section {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
       }
 
       #kinetic-canvas {
-        position: fixed;
+        position: absolute;
         top: 37px;
         left: 0;
         width: 100%;
-        height: calc(100vh - 37px - 57px);
+        height: calc(100% - 37px - 57px);
         z-index: 1;
         pointer-events: none;
       }
@@ -39,21 +47,19 @@
 
       .lang-toggle-fixed {
         position: static;
-        color: #ffffff;
+        color: #fff;
         font-family: 'Courier New', monospace;
         font-size: 0.85rem;
         letter-spacing: 0.1em;
       }
 
       .lang-toggle-fixed a {
-        color: #ffffff;
+        color: #fff;
         text-decoration: none;
         opacity: 0.6;
       }
 
-      .lang-toggle-fixed a.active {
-        opacity: 1;
-      }
+      .lang-toggle-fixed a.active { opacity: 1; }
 
       .lang-toggle-fixed span {
         margin: 0 0.3rem;
@@ -71,11 +77,11 @@
         justify-content: center;
         gap: 2.5rem;
         padding: 1rem 2rem;
-        z-index: 20;
+        z-index: 100;
       }
 
       .landing-footer a {
-        color: #ffffff;
+        color: #fff;
         text-decoration: none;
         font-family: 'Courier New', monospace;
         font-size: 0.85rem;
@@ -85,22 +91,61 @@
         transition: opacity 0.2s;
       }
 
-      .landing-footer a:hover {
-        opacity: 1;
-      }
+      .landing-footer a:hover { opacity: 1; }
 
       .landing-footer .footer-copy {
-        color: #555;
+        color: #444;
         font-family: 'Courier New', monospace;
         font-size: 0.65rem;
         letter-spacing: 0.08em;
         white-space: nowrap;
       }
+
+      /* ── DISCOGRAPHY SECTION ── */
+      .disco-section {
+        background: #000;
+        padding: 80px 6vw 100px;
+        min-height: 100vh;
+      }
+
+      .disco-section h2 {
+        font-family: 'Courier New', monospace;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        letter-spacing: 0.1em;
+        text-transform: lowercase;
+        margin-bottom: 48px;
+        color: #fff;
+      }
+
+      .album-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
+      }
+
+      .album-link {
+        display: block;
+        transition: opacity 0.2s, transform 0.2s;
+      }
+
+      .album-link:hover {
+        opacity: 0.8;
+        transform: scale(1.02);
+      }
+
+      .album-art {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        display: block;
+        object-fit: cover;
+        border: 1px solid #222;
+      }
     </style>
   </head>
   <body class="landing">
-    <canvas id="kinetic-canvas"></canvas>
 
+    <!-- Fixed header -->
     <header class="landing-header">
       <div class="lang-toggle-fixed">
         <a class="active" href="index.html">SE</a>
@@ -109,105 +154,60 @@
       </div>
     </header>
 
+    <!-- Fixed footer nav -->
     <footer class="landing-footer">
-      <a href="about.html">Om oss</a>
-      <a href="discography.html">Diskografi</a>
-      <a href="merch.html">Merch</a>
-      <a href="contact.html">Kontakt</a>
+      <a href="#diskografi">Diskografi</a>
       <span class="footer-copy">© 2026 Anwai</span>
     </footer>
 
+    <!-- Hero: kinetic typography -->
+    <section class="hero-section">
+      <canvas id="kinetic-canvas"></canvas>
+    </section>
+
+    <!-- Discography scroll section -->
+    <section class="disco-section" id="diskografi">
+      <h2>diskografi</h2>
+      <div class="album-grid">
+        <a class="album-link" href="https://open.spotify.com/album/2PeCMFOso773xZcZQxNw4C?si=zTf_Cj9tTvetiI7vMa8Utg" target="_blank" rel="noopener noreferrer">
+          <img src="dreamsriks.png" alt="anwai - dreams / changing (acoustic)" class="album-art" loading="lazy" decoding="async" />
+        </a>
+        <a class="album-link" href="https://open.spotify.com/album/1D3nvkIslGYiYNde31Z0le?si=L6cow8Y3Tq-Ey8V0wwZJXw" target="_blank" rel="noopener noreferrer">
+          <img src="dreams.png" alt="anwai - dreams" class="album-art" loading="lazy" decoding="async" />
+        </a>
+        <a class="album-link" href="https://open.spotify.com/album/050dh9VNMkyMcVDmDrqSaa?si=P-LXPdvkSm6nSKPhnF1Rkw" target="_blank" rel="noopener noreferrer">
+          <img src="moneyrain.png" alt="anwai - money rain" class="album-art" loading="lazy" decoding="async" />
+        </a>
+        <a class="album-link" href="https://open.spotify.com/album/1ENutPYqMIDWUEgVnIdKar?si=yiGd2Y0oRYekrdUY8056Dw" target="_blank" rel="noopener noreferrer">
+          <img src="waste of time.png" alt="anwai - waste of time" class="album-art" loading="lazy" decoding="async" />
+        </a>
+        <a class="album-link" href="https://open.spotify.com/track/51YdPLXCYIBgEhwhJHirjy?si=7477f54f713f41e8" target="_blank" rel="noopener noreferrer">
+          <img src="movealong.png" alt="anwai - move along" class="album-art" loading="lazy" decoding="async" />
+        </a>
+        <a class="album-link" href="https://open.spotify.com/track/6BPHmElfRujFRYTzwfQHT8?si=f1d27b6fe3c3462f" target="_blank" rel="noopener noreferrer">
+          <img src="asking.png" alt="anwai - asking" class="album-art" loading="lazy" decoding="async" />
+        </a>
+      </div>
+    </section>
+
     <script>
       const config = {
-        "text": "anwai",
-        "rows": 15,
-        "fontSize": 92,
-        "tracking": 0.6,
-        "lineSpace": 5,
-        "baseColor": "#ffffff",
-        "spiralEnabled": false,
-        "spiralIntensity": 50,
-        "spiralSpeed": 1,
-        "spiralTightness": 0.5,
-        "spiralInward": false,
-        "elasticEnabled": false,
-        "elasticStretch": 0.3,
-        "elasticSpeed": 1,
-        "elasticFreq": 0.02,
-        "orbitEnabled": false,
-        "orbitRadius": 30,
-        "orbitSpeed": 1,
-        "orbitPhase": 0.5,
-        "liquidEnabled": false,
-        "liquidDrip": 50,
-        "liquidFlow": 0.5,
-        "liquidViscosity": 0.01,
-        "chromaticEnabled": true,
-        "chromaticOffset": 2,
-        "chromaticAngle": 360,
-        "chromaticAnimated": true,
-        "glitchEnabled": true,
-        "glitchIntensity": 0,
-        "glitchFreq": 0.01,
-        "glitchSlice": 16,
-        "depthEnabled": true,
-        "depthParallax": 1.6,
-        "depthScale": 1,
-        "depthOpacity": 0.55,
+        "text": "anwai", "rows": 15, "fontSize": 92, "tracking": 0.6, "lineSpace": 5,
+        "baseColor": "#ffffff", "spiralEnabled": false, "elasticEnabled": false,
+        "orbitEnabled": false, "liquidEnabled": false,
+        "chromaticEnabled": true, "chromaticOffset": 2, "chromaticAngle": 360, "chromaticAnimated": true,
+        "glitchEnabled": true, "glitchIntensity": 0, "glitchFreq": 0.01, "glitchSlice": 16,
+        "depthEnabled": true, "depthParallax": 1.6, "depthScale": 1, "depthOpacity": 0.55,
         "shatterEnabled": false,
-        "shatterFrag": 10,
-        "shatterSpread": 30,
-        "shatterRotation": 0.5,
-        "shatterGravity": true,
-        "scrollEnabled": true,
-        "scrollSpeed": 0,
-        "scrollImpact": 50,
-        "scrollReverse": false,
-        "mouseEnabled": true,
-        "mouseMode": "repel",
-        "mouseRadius": 322,
-        "mouseStrength": 104,
-        "mouseTrail": false,
-        "rotation3dEnabled": true,
-        "rotationX": 0,
-        "rotationY": 0,
-        "rotationZ": 0,
-        "rotationXSpeed": 0,
-        "rotationYSpeed": 0,
-        "rotationZSpeed": 0,
-        "perspective": 1000,
-        "perspectiveOriginX": 50,
-        "perspectiveOriginY": 50,
-        "bgMode": "solid",
-        "bgColor": "#000000",
-        "bgGradientColor1": "#0a0a2e",
-        "bgGradientColor2": "#1a0a2e",
-        "bgGradientAngle": 135,
-        "bgGradientSpeed": 0,
-        "bgNoiseOpacity": 0,
-        "bgVignetteStrength": 0,
-        "bgScanlineOpacity": 0,
-        "bgScanlineSpacing": 4,
-        "bgPulseSpeed": 1,
-        "bgPulseStrength": 0,
-        "gradientEnabled": false,
-        "gradientColor1": "#000000",
-        "gradientColor2": "#a1a1a1",
-        "gradientAngle": 0,
-        "gradientAnimated": false,
-        "glowEnabled": true,
-        "glowColor": "#5c5c5c",
-        "glowIntensity": 10,
-        "glowBlur": 20,
-        "hueRotateEnabled": false,
-        "hueRotateSpeed": 1
+        "scrollEnabled": true, "scrollImpact": 50, "scrollReverse": false,
+        "mouseEnabled": true, "mouseMode": "repel", "mouseRadius": 322, "mouseStrength": 104,
+        "rotation3dEnabled": true, "rotationX": 0, "rotationY": 0, "rotationZ": 0,
+        "perspective": 1000, "perspectiveOriginX": 50, "perspectiveOriginY": 50,
+        "glowEnabled": true, "glowColor": "#5c5c5c", "glowBlur": 20,
+        "gradientEnabled": false, "hueRotateEnabled": false
       };
 
-      let time = 0;
-      let scrollProgress = 0;
-      let mouseX = 0;
-      let mouseY = 0;
-      let mouseMoved = false;
+      let time = 0, scrollProgress = 0, mouseX = 0, mouseY = 0, mouseMoved = false;
 
       const canvas = document.getElementById('kinetic-canvas');
       const ctx = canvas.getContext('2d');
@@ -216,7 +216,6 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
       }
-
       window.addEventListener('resize', resizeCanvas);
       resizeCanvas();
 
@@ -226,35 +225,28 @@
       });
 
       window.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        mouseMoved = true;
+        mouseX = e.clientX; mouseY = e.clientY; mouseMoved = true;
       });
 
       function drawText() {
         ctx.fillStyle = '#000';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        const fontSize = config.fontSize;
-        ctx.font = `${fontSize}px 'Courier New', monospace`;
+        ctx.font = `${config.fontSize}px 'Courier New', monospace`;
         ctx.textAlign = 'left';
         ctx.textBaseline = 'middle';
 
         const charWidth = ctx.measureText('M').width * config.tracking;
         const textPattern = config.text + '  ';
         const patternWidth = charWidth * textPattern.length;
-
-        const scrollOffset = config.scrollEnabled ?
-          scrollProgress * config.scrollImpact * (config.scrollReverse ? -1 : 1) : 0;
+        const scrollOffset = scrollProgress * config.scrollImpact;
 
         for (let row = 0; row < config.rows; row++) {
           const baseY = (canvas.height / (config.rows + 1)) * (row + 1);
-
-          const depthLayer = config.depthEnabled ? row / config.rows : 0.5;
-          const depthScale = config.depthEnabled ? 1 - (depthLayer * config.depthScale) : 1;
-          const depthOpacity = config.depthEnabled ? 1 - (depthLayer * config.depthOpacity) : 1;
-          const depthOffset = config.depthEnabled ? scrollOffset * depthLayer * config.depthParallax * 100 : 0;
-
+          const depthLayer = row / config.rows;
+          const depthScale = 1 - depthLayer * config.depthScale;
+          const depthOpacity = 1 - depthLayer * config.depthOpacity;
+          const depthOffset = scrollOffset * depthLayer * config.depthParallax * 100;
           const rowSpeed = row % 2 === 0 ? 1 : -1;
           const baseRowOffset = (time * 10 * rowSpeed + scrollOffset * 10 + depthOffset) % patternWidth;
           const repeatsNeeded = Math.ceil(canvas.width / (patternWidth * depthScale)) + 3;
@@ -264,60 +256,24 @@
               const char = textPattern[i];
               if (char === ' ') continue;
 
-              let baseX = repeat * patternWidth + i * charWidth - baseRowOffset;
-              let x = baseX;
+              let x = repeat * patternWidth + i * charWidth - baseRowOffset;
               let y = baseY;
               let rotation = 0;
-              let scaleX = depthScale;
-              let scaleY = depthScale;
-              let opacity = depthOpacity;
+              let scaleX = depthScale, scaleY = depthScale, opacity = depthOpacity;
 
-              if (config.glitchEnabled) {
-                const glitchNoise = Math.random();
-                if (glitchNoise < config.glitchFreq) {
-                  x += (Math.random() - 0.5) * config.glitchIntensity * 2;
-                  y += Math.floor(Math.random() * config.glitchSlice) * (Math.random() > 0.5 ? 1 : -1);
-                }
+              if (config.glitchEnabled && Math.random() < config.glitchFreq) {
+                y += Math.floor(Math.random() * config.glitchSlice) * (Math.random() > 0.5 ? 1 : -1);
               }
 
               if (config.mouseEnabled && mouseMoved) {
-                const dx = x - mouseX;
-                const dy = y - mouseY;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < config.mouseRadius) {
-                  const force = (1 - distance / config.mouseRadius) * config.mouseStrength;
+                const dx = x - mouseX, dy = y - mouseY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < config.mouseRadius) {
+                  const force = (1 - dist / config.mouseRadius) * config.mouseStrength;
                   const angle = Math.atan2(dy, dx);
-                  if (config.mouseMode === 'repel') {
-                    x += Math.cos(angle) * force;
-                    y += Math.sin(angle) * force;
-                  } else if (config.mouseMode === 'attract') {
-                    x -= Math.cos(angle) * force;
-                    y -= Math.sin(angle) * force;
-                  }
+                  x += Math.cos(angle) * force;
+                  y += Math.sin(angle) * force;
                 }
-              }
-
-              if (config.rotation3dEnabled) {
-                const radX = config.rotationX * Math.PI / 180;
-                const radY = config.rotationY * Math.PI / 180;
-                const centerX = canvas.width * (config.perspectiveOriginX / 100);
-                const centerY = canvas.height * (config.perspectiveOriginY / 100);
-                const relX = x - centerX;
-                const relY = y - centerY;
-                const cosY = Math.cos(radY);
-                const sinY = Math.sin(radY);
-                const x3d = relX * cosY;
-                const z3d = relX * sinY;
-                const cosX = Math.cos(radX);
-                const sinX = Math.sin(radX);
-                const y3d = relY * cosX - z3d * sinX;
-                const z3dFinal = relY * sinX + z3d * cosX;
-                const scale3d = config.perspective / (config.perspective + z3dFinal);
-                x = centerX + x3d * scale3d;
-                y = centerY + y3d * scale3d;
-                scaleX *= scale3d;
-                scaleY *= scale3d;
-                opacity *= Math.max(0.3, scale3d);
               }
 
               if (x > -200 && x < canvas.width + 200 && y > -200 && y < canvas.height + 200) {
@@ -326,54 +282,32 @@
                 ctx.rotate(rotation);
                 ctx.scale(scaleX, scaleY);
                 ctx.globalAlpha = opacity;
+                ctx.shadowColor = config.glowColor;
+                ctx.shadowBlur = config.glowBlur;
 
-                if (config.glowEnabled) {
-                  ctx.shadowColor = config.glowColor;
-                  ctx.shadowBlur = config.glowBlur;
-                  ctx.shadowOffsetX = 0;
-                  ctx.shadowOffsetY = 0;
-                }
+                const offset = 2;
+                const angle = (360 + time * 50) * Math.PI / 180;
+                const ox = Math.cos(angle) * offset, oy = Math.sin(angle) * offset;
 
-                if (config.chromaticEnabled) {
-                  const offset = config.chromaticOffset;
-                  const angle = config.chromaticAnimated ?
-                    (config.chromaticAngle + time * 50) * Math.PI / 180 :
-                    config.chromaticAngle * Math.PI / 180;
-                  const offsetX = Math.cos(angle) * offset;
-                  const offsetY = Math.sin(angle) * offset;
+                ctx.fillStyle = '#ff0000';
+                ctx.globalAlpha = opacity * 0.5;
+                ctx.fillText(char, -ox, -oy);
+                ctx.fillStyle = '#00ff00';
+                ctx.fillText(char, 0, 0);
+                ctx.fillStyle = '#0000ff';
+                ctx.fillText(char, ox, oy);
+                ctx.globalAlpha = opacity;
 
-                  ctx.fillStyle = '#ff0000';
-                  ctx.globalAlpha = opacity * 0.5;
-                  ctx.fillText(char, -offsetX, -offsetY);
-
-                  ctx.fillStyle = '#00ff00';
-                  ctx.fillText(char, 0, 0);
-
-                  ctx.fillStyle = '#0000ff';
-                  ctx.fillText(char, offsetX, offsetY);
-
-                  ctx.globalAlpha = opacity;
-                } else {
-                  ctx.fillStyle = config.baseColor;
-                  ctx.fillText(char, 0, 0);
-                }
-
-                ctx.filter = 'none';
                 ctx.shadowBlur = 0;
                 ctx.restore();
               }
             }
           }
         }
-
         time += 0.03;
       }
 
-      function animate() {
-        drawText();
-        requestAnimationFrame(animate);
-      }
-
+      function animate() { drawText(); requestAnimationFrame(animate); }
       animate();
     </script>
   </body>
