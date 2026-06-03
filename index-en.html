@@ -101,9 +101,18 @@
       }
 
       .disco-section {
-        background: #000;
+        position: relative;
         padding: 80px 6vw 100px;
         min-height: 100vh;
+        overflow: hidden;
+      }
+
+      #gradient-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
       }
 
       .disco-section h2 {
@@ -119,6 +128,8 @@
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         gap: 16px;
+        position: relative;
+        z-index: 1;
       }
 
       .album-link {
@@ -161,6 +172,7 @@
     </section>
 
     <section class="disco-section" id="discography">
+      <canvas id="gradient-canvas"></canvas>
       <div class="album-grid">
         <a class="album-link" href="https://open.spotify.com/album/2PeCMFOso773xZcZQxNw4C?si=zTf_Cj9tTvetiI7vMa8Utg" target="_blank" rel="noopener noreferrer">
           <img src="dreamsriks.png" alt="anwai - dreams / changing (acoustic)" class="album-art" loading="lazy" decoding="async" />
@@ -182,6 +194,69 @@
         </a>
       </div>
     </section>
+
+    <script src="three.min.js"></script>
+    <script>
+      (function() {
+        const gradConfig = {"color1":"#8051a9","color2":"#e295fb","color3":"#50a8fc","color4":"#6779e3","speed":0.5,"scale":2,"complexity":4,"oscillationSpeed":0.3,"zoomLevel":0.832,"shadowIntensity":0.5};
+        const vertexShader = `varying vec2 vUv; void main() { vUv = uv; gl_Position = vec4(position, 1.0); }`;
+        const fragmentShader = `
+          uniform vec3 u_color1; uniform vec3 u_color2; uniform vec3 u_color3; uniform vec3 u_color4;
+          uniform float u_time; uniform float u_speed; uniform float u_scale; uniform float u_complexity;
+          uniform float u_zoomLevel; uniform vec2 u_panOffset;
+          varying vec2 vUv;
+          vec3 mod289(vec3 x){return x-floor(x*(1./289.))*289.;}
+          vec2 mod289(vec2 x){return x-floor(x*(1./289.))*289.;}
+          vec3 permute(vec3 x){return mod289(((x*34.)+1.)*x);}
+          float snoise(vec2 v){
+            const vec4 C=vec4(0.211324865405187,0.366025403784439,-0.577350269189626,0.024390243902439);
+            vec2 i=floor(v+dot(v,C.yy)); vec2 x0=v-i+dot(i,C.xx);
+            vec2 i1=(x0.x>x0.y)?vec2(1.,0.):vec2(0.,1.);
+            vec4 x12=x0.xyxy+C.xxzz; x12.xy-=i1; i=mod289(i);
+            vec3 p=permute(permute(i.y+vec3(0.,i1.y,1.))+i.x+vec3(0.,i1.x,1.));
+            vec3 m=max(0.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.);
+            m=m*m; m=m*m;
+            vec3 x=2.*fract(p*C.www)-1.; vec3 h=abs(x)-0.5;
+            vec3 ox=floor(x+0.5); vec3 a0=x-ox;
+            m*=1.79284291400159-0.85373472095314*(a0*a0+h*h);
+            vec3 g; g.x=a0.x*x0.x+h.x*x0.y; g.yz=a0.yz*x12.xz+h.yz*x12.yw;
+            return 130.*dot(m,g);
+          }
+          float fbm(vec2 p){float v=0.;float a=0.5;for(float i=0.;i<6.;i++){if(i>=u_complexity)break;v+=a*snoise(p);p*=2.;a*=0.5;}return v;}
+          void main(){
+            vec2 uv=vUv+u_panOffset;
+            vec2 pos=(uv-0.5)*(2./u_zoomLevel)+0.5; pos=pos*u_scale;
+            float t=u_time*u_speed;
+            float pattern=fbm(pos+vec2(t*0.3,t*0.2))+fbm(pos*1.5-vec2(t*0.2,t*0.3))*0.5;
+            pattern=pattern*0.5+0.5;
+            float t1=smoothstep(0.,0.33,pattern);float t2=smoothstep(0.33,0.66,pattern);float t3=smoothstep(0.66,1.,pattern);
+            vec3 color=mix(u_color1,u_color2,t1);color=mix(color,u_color3,t2);color=mix(color,u_color4,t3);
+            gl_FragColor=vec4(color,1.);
+          }`;
+        function initGradient() {
+          const canvas = document.getElementById('gradient-canvas');
+          if (!canvas) return;
+          const scene = new THREE.Scene();
+          const camera = new THREE.OrthographicCamera(-1,1,1,-1,0,1);
+          const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+          function resize() { const s = canvas.parentElement; renderer.setSize(s.offsetWidth, s.offsetHeight); }
+          resize(); window.addEventListener('resize', resize);
+          const p = { color1: new THREE.Color(gradConfig.color1), color2: new THREE.Color(gradConfig.color2), color3: new THREE.Color(gradConfig.color3), color4: new THREE.Color(gradConfig.color4) };
+          const orig = { color1: new THREE.Color(gradConfig.color1), color2: new THREE.Color(gradConfig.color2), color3: new THREE.Color(gradConfig.color3), color4: new THREE.Color(gradConfig.color4) };
+          const mat = new THREE.ShaderMaterial({ vertexShader, fragmentShader, uniforms: { u_color1:{value:p.color1}, u_color2:{value:p.color2}, u_color3:{value:p.color3}, u_color4:{value:p.color4}, u_time:{value:0}, u_speed:{value:gradConfig.speed}, u_scale:{value:gradConfig.scale}, u_complexity:{value:gradConfig.complexity}, u_zoomLevel:{value:gradConfig.zoomLevel}, u_panOffset:{value:new THREE.Vector2(0,0)} } });
+          scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2,2), mat));
+          const ease = t => t<0.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+          function animate(time) {
+            const cd=5000/gradConfig.oscillationSpeed, cp=(time%cd)/cd*4;
+            const gc=pos=>{const colors=[orig.color1,orig.color2,orig.color3,orig.color4],n=((pos%4)+4)%4,s=Math.floor(n),r=new THREE.Color();r.lerpColors(colors[s],colors[(s+1)%4],ease(n-s));return r;};
+            p.color1.copy(gc(cp));p.color2.copy(gc(cp+1));p.color3.copy(gc(cp+2));p.color4.copy(gc(cp+3));
+            mat.uniforms.u_time.value=time*0.001; renderer.render(scene,camera); requestAnimationFrame(animate);
+          }
+          animate(0);
+        }
+        if(typeof THREE!=='undefined'){initGradient();}else{const iv=setInterval(()=>{if(typeof THREE!=='undefined'){clearInterval(iv);initGradient();}},100);}
+      })();
+    </script>
 
     <script>
       const config = {
